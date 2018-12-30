@@ -24,14 +24,14 @@ my_tokens <- tokens_remove(my_tokens, noisewords)
 my_tokens <- tokens_wordstem(my_tokens)
 my_tokens <- tokens_select(my_tokens, min_nchar = 4)
 my_tokens <- tokens(my_tokens, ngrams = 2)
-full_dfm <- dfm(my_tokens)
+full_set_dfm <- dfm(my_tokens)
 
 # eliminate bigrams that occur in less than 2% of the opinions
-full_dfm <- dfm_trim(full_dfm, min_docfreq = 0.02, 
+full_set_dfm <- dfm_trim(full_set_dfm, min_docfreq = 0.02, 
                       docfreq_type = "prop")
 
 # clean up the workspace
-rm.all.but("full_dfm")
+rm.all.but("full_set_dfm")
 
 # save the workspace
 save.image("~/OneDrive/Projects/corporate-veil/data/full-set-dfm.RData")
