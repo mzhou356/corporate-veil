@@ -216,19 +216,15 @@ My R code uses the doMC package in order to enable parallel processing on a Mac 
 # and the following three lines of code (as well as the temination
 # line of code at the very end of the script) to enable parallel
 # processing. With parallel processing enabled, the complete script
-# was run in ~15 minutes on an iMac Pro (2017) with CPU 3.2 GHz Intel
+# was run in ~30 minutes on an iMac Pro (2017) with CPU 3.2 GHz Intel
 # Xeon W, RAM 32 GB 2666 MHz DDR4, and GPU Radeon Pro Vega 56 8176 MB.
-# (This running time does not take into account the initial, one-time
-# downloading of the full text of ~12,000 opinions, which took over
-# two hours due to throttling limitations on the free CourtListener
-# API website.) The script will require more time to execute without
-# parallel processing, and may exceed memory limits on a computer with
-# less than 32 GB of RAM. The doMC package will only run on Macs and
-# other Unix-type machines with multiple processors, multiple cores,
-# or both. The line above installing the doMC package, the following
-# three lines of code, and the termination line of code at the very end
-# of this script must be commented out if the script will not be run on
-# a Mac with multiple cores.
+# The script will require more time to execute without parallel
+# processing, and may exceed memory limits on a computer with less
+# than 32 GB of RAM. The doMC package will only run on Macs and other
+# Unix-type machines with multiple processors, multiple cores, or both.
+# The line above installing the doMC package, the following three lines
+# of code, and the termination line of code at the very end of this
+# script must be commented out if the script will not be run on a Mac.
 
 num_cores <- ceiling(detectCores() / 2)
 registerDoMC(cores = num_cores)
