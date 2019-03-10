@@ -21,6 +21,8 @@ In this assignment for the HarvardX PH125.9x online data science course, student
 
 As described below, my capstone project explores how natural language processing (NLP) machine-learning techniques can be applied in a typical legal research setting.
 
+Important Note: My R code (which is included in the Rmd file and the R script file) uses the doMC package to enable parallel processing. With parallel processing enabled, the R code executes in ~30 minutes on an iMac Pro (2017) with CPU 3.2 GHz Intel Xeon W, RAM 32 GB 2666 MHz DDR4, and GPU Radeon Pro Vega 56 8176 MB. The R code will require more time to execute without parallel processing, and may exceed memory limits on a computer with less than 32 GB of RAM. The doMC package will only run on Macs and other Unix-type machines with multiple processors, multiple cores, or both. The R code includes a similar important note at the outset, referring to certain lines of code that must be commented out if the script will not be run on a Mac.
+
 ## Background
 
 Entrepreneurs who wish to start a new business can limit their personal liability by forming a corporation or limited liability company (often referred to as a business entity) to conduct the business. That way, if their business somehow harms other people and leads to litigation, only the portion of their personal assets that they have committed to the business (as opposed to their homes and the rest of their life savings) will be at risk. Essentially, society has decided to encourage entrepreneurship and the creation of new businesses by limiting what would otherwise be the legal rights of other people -- who might be harmed by the new business -- to sue the entrepreneur personally.
@@ -129,9 +131,9 @@ As described below in the Analysis section of this report, my overall approach t
 
 19.	Use this information to determine whether the judges’ decisions in these cases involving workplace injuries and fatalities comport with the first element of the professors' theoretical framework, i.e., whether the judges were *more likely to disregard* the limited liability structure in this category of cases since they involve an applicable workers compensation statute.
 
-## Findings
+## Results
 
-As described below in the Findings section of my report, I was able to replicate the essential results of the professors’ machine-learning analysis of the full set of relevant cases through my machine-learning analysis of the subset of relevant *tort* cases. I also reach most, but not all, of the same conclusions the professors did in examining the results of our respective machine-learning analyses.
+As described below in the Results section of my report, I was able to replicate the essential results of the professors’ machine-learning analysis of the full set of relevant cases through my machine-learning analysis of the subset of relevant *tort* cases. I also reach most, but not all, of the same conclusions the professors did in examining the results of our respective machine-learning analyses.
 
 ### The Professors' Theoretical Framework
 
@@ -141,7 +143,7 @@ In their published paper, professors Macey and Mitts announced that they had dev
 
 * My analysis of the hand-coded relevant tort cases also found that judges are in fact *more likely to disregard* the limited liability entity structure in cases involving workers compensation statutes (which is consistent with the professors' theoretical framework).
 
-* I do, however, have one concern regarding the professors' *methodology* and the *conclusions* they drew from the results of their machine-learning analysis, as discussed below in the Findings section of this report.
+* I do, however, have one concern regarding the professors' *methodology* and the *conclusions* they drew from the results of their machine-learning analysis, as discussed below in the Results section of this report.
 
 ### Importance of the Factors Judges Discuss in Their Opinions
 
@@ -149,7 +151,7 @@ In their published paper, professors Macey and Mitts also reported finding relat
 
 * Following the professors' methodology, my machine-learning analysis of the hand-coded relevant tort cases also found relatively low *outcome-predictive weights* for the bigram features associated with the observance of corporate formalities and the adequacy of the entity’s capitalization.
 
-* I do, however, have one concern regarding the professors' *methodology* and the *conclusions* they drew from the results of their machine-learning analysis, as discussed below in the Findings section of this report.
+* I do, however, have one concern regarding the professors' *methodology* and the *conclusions* they drew from the results of their machine-learning analysis, as discussed below in the Results section of this report.
 
 * Therefore, I am unable to conclude on the basis of the professors’ description of their methodology and their reported results that judges *actually* pay relatively little attention to the very factors they discuss at length in their published opinions in deciding whether to respect or disregard the limited liability entity structure.
 
@@ -1876,7 +1878,7 @@ In this step, I manually examine the outcome-predictive weights of the ranked bi
 
 Note in this regard that few if any of the top 25 outcome-predictive features in the above table appear to involve the observance of corporate formalities or the adequacy of the entity’s capitalization, at least explicitly.
 
-My findings and thoughts in this regard are set forth below in the Findings section of this report.
+My findings and thoughts in this regard are set forth below in the Results section of this report.
 
 ## Create topic model for hand-coded relevant opinions
 
@@ -2024,7 +2026,7 @@ Therefore, although the difference is relatively modest, it does appear from the
 
 In this step, I compare the results of my topic-model analysis with the professors' published results, and consider whether our respective results are consistent with and tend to support the professors' theoretical framework.
 
-My findings and thoughts in this regard are forth in more detail below in the Findings section of this report.
+My findings and thoughts in this regard are forth in more detail below in the Results section of this report.
 
 ## Terminate parallel processing
 
@@ -2040,7 +2042,7 @@ registerDoSEQ()
 
 ```
 
-# Findings
+# Results
 
 Through my machine-learning analysis of the subset of relevant *tort* opinions, I was able to replicate the essential results of the professors’ machine-learning analysis of the full set of relevant opinions. I also reach most, but not all, of the same conclusions the professors did in examining the results of our respective machine-learning analyses.
 
