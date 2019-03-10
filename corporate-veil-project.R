@@ -1,4 +1,3 @@
-
 #############################################################
 # Load required packages and enable parallel processing
 #############################################################
@@ -1328,61 +1327,61 @@ out_imp <- out_imp[c(2, 1)]
 
 kable(out_imp[1:25, 1:2], digits = 3, row.names = FALSE)
 
+## 
+## #############################################################
+## # create topic model for hand-coded relevant opinions
+## #############################################################
+## 
+## # fit an LDA model with three topics
+## 
+## dtm <- convert(hand_coded_rel_dfm, to = "topicmodels")
+## lda_model <- LDA(dtm, k = 3, method = "Gibbs",
+##                  control = list(seed = 99))
+## 
+## # extract the features associated with each topic and their LDA weights
+## 
+## lda_terms <- posterior(lda_model)
+## topic_1_terms <- data.frame(feature = names(lda_terms$terms[1, ]),
+##                             weight = lda_terms$terms[1, ])
+## topic_1_terms$feature <- as.character(topic_1_terms$feature)
+## topic_2_terms <- data.frame(feature = names(lda_terms$terms[2, ]),
+##                             weight = lda_terms$terms[2, ])
+## topic_2_terms$feature <- as.character(topic_2_terms$feature)
+## topic_3_terms <- data.frame(feature = names(lda_terms$terms[3, ]),
+##                             weight = lda_terms$terms[3, ])
+## topic_3_terms$feature <- as.character(topic_3_terms$feature)
+## 
+## # calculate an adjusted weight for each feature equal to
+## # the product of its LDA weight and its svm importance
+## 
+## topic_1_terms <- (merge(topic_1_terms, out_imp) %>%
+##                     mutate("adj_weight" = weight * importance))
+## topic_2_terms <- (merge(topic_2_terms, out_imp) %>%
+##                     mutate("adj_weight" = weight * importance))
+## topic_3_terms <- (merge(topic_3_terms, out_imp) %>%
+##                     mutate("adj_weight" = weight * importance))
+## 
+## # select top 25 features for each topic using adj prob
+## 
+## topic_1_top25 <- (top_n(topic_1_terms %>% arrange(desc(adj_weight)),
+##                         25, adj_weight))[, 1]
+## topic_2_top25 <- (top_n(topic_2_terms %>% arrange(desc(adj_weight)),
+##                         25, adj_weight))[, 1]
+## topic_3_top25 <- (top_n(topic_3_terms %>% arrange(desc(adj_weight)),
+##                         25, adj_weight))[, 1]
+## 
+## # create a data frame to hold the top 25 features for each topic
+## 
+## topics <- tibble("Topic 1" = topic_1_top25,
+##                  "Topic 2" = topic_2_top25,
+##                  "Topic 3" = topic_3_top25)
+## 
 
 #############################################################
-# create topic model for hand-coded relevant opinions
+# load previously saved results for this step
 #############################################################
 
-# fit an LDA model with three topics
-
-dtm <- convert(hand_coded_rel_dfm, to = "topicmodels")
-lda_model <- LDA(dtm, k = 3, method = "Gibbs",
-                 control = list(seed = 99))
-
-# extract the features associated with each topic and their LDA weights
-
-lda_terms <- posterior(lda_model)
-topic_1_terms <- data.frame(feature = names(lda_terms$terms[1, ]),
-                            weight = lda_terms$terms[1, ])
-topic_1_terms$feature <- as.character(topic_1_terms$feature)
-topic_2_terms <- data.frame(feature = names(lda_terms$terms[2, ]),
-                            weight = lda_terms$terms[2, ])
-topic_2_terms$feature <- as.character(topic_2_terms$feature)
-topic_3_terms <- data.frame(feature = names(lda_terms$terms[3, ]),
-                            weight = lda_terms$terms[3, ])
-topic_3_terms$feature <- as.character(topic_3_terms$feature)
-
-# calculate an adjusted weight for each feature equal to
-# the product of its LDA weight and its svm importance
-
-topic_1_terms <- (merge(topic_1_terms, out_imp) %>%
-                    mutate("adj_weight" = weight * importance))
-topic_2_terms <- (merge(topic_2_terms, out_imp) %>%
-                    mutate("adj_weight" = weight * importance))
-topic_3_terms <- (merge(topic_3_terms, out_imp) %>%
-                    mutate("adj_weight" = weight * importance))
-
-# select top 25 features for each topic using adj prob
-
-topic_1_top25 <- (top_n(topic_1_terms %>% arrange(desc(adj_weight)),
-                        25, adj_weight))[, 1]
-topic_2_top25 <- (top_n(topic_2_terms %>% arrange(desc(adj_weight)),
-                        25, adj_weight))[, 1]
-topic_3_top25 <- (top_n(topic_3_terms %>% arrange(desc(adj_weight)),
-                        25, adj_weight))[, 1]
-
-# create a data frame to hold the top 25 features for each topic
-
-topics <- tibble("Topic 1" = topic_1_top25,
-                 "Topic 2" = topic_2_top25,
-                 "Topic 3" = topic_3_top25)
-
-
-## #############################################################
-## # load previously saved results for this step
-## #############################################################
-
-## load("data/topic-model-table.RData")
+load("data/topic-model-table.RData")
 
 
 kable(topics)

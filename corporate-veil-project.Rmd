@@ -1892,9 +1892,9 @@ Since an outcome in which the judge *disregards* the limited liability entity st
 
 In generating this report several times (without changing anything in the saved Rmd file), I discovered that the R code for this step generates a *different* result each time the same Rmd file is knitted. Therefore, as an experiment, I executed the *R code itself* (rather than knitting it) several times, and each time it generated the *same* result. The R code includes a local seed-setting parameter -- which is why the R code itself creates reproducible results -- but for some reason the R code executes differently each time when the Rmd file containing the same R code is knitted.
 
-In order to address this issue -- which may be a "bug" in Rstudio based on my review of various related postings on Stack Overflow -- I have disabled this portion of the R code in my Rmd file (with an “eval=FALSE” tag) so that it will not execute when the Rmd file is knitted to a PDF file.
+In order to address this issue -- which may be a "bug" in Rstudio based on my review of various related postings on Stack Overflow -- I have disabled this portion of the R code in my Rmd file (with an “eval=FALSE” tag) so that it will not execute when the Rmd file is knitted to a PDF file. I have similarly commented out this portion of the R code in my R script file.
 
-Instead, I saved the (reproducible) results of executing the R code itself in a file named “data/topic-model-table.RData” on my [public GitHub site](https://github.com/dcbarnard/corporate-veil), available at https://github.com/dcbarnard/corporate-veil.
+Instead, I have saved the results of executing the R code itself in a file named “data/topic-model-table.RData” on my [public GitHub site](https://github.com/dcbarnard/corporate-veil), available at https://github.com/dcbarnard/corporate-veil.
 
 ```{r, include=FALSE, eval=FALSE}
 
@@ -1948,7 +1948,7 @@ topics <- tibble("Topic 1" = topic_1_top25,
 
 ```
 
-Since this portion of the R code in my Rmd file has been disabled, my Rmd file also includes R code that will load the saved reproducible results.
+Since this portion of the R code in my Rmd file has been disabled, my Rmd file also includes R code that will load the saved results.
 
 ```{r, include=FALSE, eval=TRUE}
 
@@ -1959,8 +1959,6 @@ Since this portion of the R code in my Rmd file has been disabled, my Rmd file a
 load("data/topic-model-table.RData")
 
 ```
-
-However, since the R code *itself* generates reproducible results, I have taken the opposite approach in the R script file, i.e., included the R code that generates the results and commented out the R code that loads the saved results.
 
 ### Returning to the analysis
 
